@@ -1,0 +1,35 @@
+{
+  "name": "react-simple-captcha",
+  "version": "1.0.0",
+  "description": "A lightweight, backend-free React captcha component.",
+  "type": "module",
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.esm.js",
+  "scripts": {
+    "build": "rollup -c"
+  },
+  "keywords": [
+    "react",
+    "captcha",
+    "security",
+    "frontend",
+    "canvas"
+  ],
+  "author": "",
+  "license": "MIT",
+  "peerDependencies": {
+    "react": "^16.8.0 || ^17.0.0 || ^18.0.0",
+    "react-dom": "^16.8.0 || ^17.0.0 || ^18.0.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.20.0",
+    "@babel/preset-env": "^7.20.0",
+    "@babel/preset-react": "^7.18.0",
+    "@rollup/plugin-babel": "^6.0.0",
+    "@rollup/plugin-commonjs": "^24.0.0",
+    "@rollup/plugin-node-resolve": "^15.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "rollup": "^3.0.0"
+  }
+}
