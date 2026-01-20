@@ -1,13 +1,15 @@
-import React, { useEffect, useRef, useState, useCallback } from 'react';
+import React, { useEffect, useRef, useState, useCallback, forwardRef, useImperativeHandle } from 'react';
 import { generateCaptcha } from '../utils/captchaGenerator';
 
-export const Captcha = ({ 
+export const Captcha = forwardRef(({ 
   length = 6, 
   width = 200, 
   height = 60, 
   onChange, 
-  refreshOnClick = true 
-}) => {
+  refreshOnClick = true,
+  textColor = '#374151',
+  backgroundColor = '#f3f4f6'
+}, ref) => {
   const canvasRef = useRef(null);
   const [captchaText, setCaptchaText] = useState('');
 
@@ -25,7 +27,7 @@ export const Captcha = ({
     ctx.clearRect(0, 0, width, height);
     
     // Background
-    ctx.fillStyle = '#f3f4f6';
+    ctx.fillStyle = backgroundColor;
     ctx.fillRect(0, 0, width, height);
     
     // Add noise (lines)
@@ -52,31 +54,40 @@ export const Captcha = ({
     
     const totalWidth = ctx.measureText(text).width;
     // Calculate total spacing available ensuring text fits within width with some padding
-    const totalSpacing = (width - totalWidth) / (text.length + 1); 
+    // minimal left/right padding = 10px
+    const totalSpacing = (width - totalWidth - 20) / (text.length - 1); 
 
     // Draw text with random rotation and position
-    let x = totalSpacing;
+    // Start at left padding
+    let x = 10;
     for (let i = 0; i < text.length; i++) {
       const char = text[i];
       ctx.save();
       // Random position distortion
       const y = height / 2 + (Math.random() * 10 - 5);
+      const xJitter = (Math.random() * 6 - 3); // -3 to +3
       
-      // Move to char position
-      ctx.translate(x + (fontSize * 0.4), y); // Adjust x slightly for better centering
+      // Move to char position with jitter
+      ctx.translate(x + xJitter, y); 
       
       // Random rotation
       const angle = (Math.random() * 30 - 15) * Math.PI / 180;
       ctx.rotate(angle);
       
-      ctx.fillStyle = '#374151';
+      ctx.fillStyle = textColor;
       ctx.fillText(char, 0, 0);
       ctx.restore();
       
-      x += ctx.measureText(char).width + totalSpacing + (Math.random() * 5);
+      x += ctx.measureText(char).width + totalSpacing;
     }
 
-  }, [length, width, height, onChange]);
+  }, [length, width, height, onChange, textColor, backgroundColor]);
+
+  useImperativeHandle(ref, () => ({
+    refresh: () => {
+      drawCaptcha();
+    }
+  }));
 
   useEffect(() => {
     drawCaptcha();
@@ -101,4 +112,6 @@ export const Captcha = ({
       }}
     />
   );
-};
+});
+
+Captcha.displayName = 'Captcha';

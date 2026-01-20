@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import { Captcha, validateCaptcha } from 'react-simple-captcha'
 import './App.css'
 
@@ -6,6 +6,8 @@ function App() {
   const [captchaCode, setCaptchaCode] = useState('')
   const [userInput, setUserInput] = useState('')
   const [status, setStatus] = useState(null)
+
+  const captchaRef = useRef(null)
 
   const handleCaptchaChange = (code) => {
     setCaptchaCode(code)
@@ -27,14 +29,22 @@ function App() {
     <div style={{ padding: '2rem', fontFamily: 'sans-serif' }}>
       <h1>React Simple Captcha Test</h1>
       
-      <div style={{ marginBottom: '1rem' }}>
-        <Captcha 
-          onChange={handleCaptchaChange} 
-          width={250} 
-          height={80} 
-        />
-        <p style={{ fontSize: '0.8rem', color: '#666' }}>Click to refresh</p>
-      </div>
+        <div style={{ marginBottom: '1rem' }}>
+          <Captcha 
+            ref={captchaRef}
+            onChange={handleCaptchaChange} 
+            width={250} 
+            height={80}
+            textColor="#ffffff"
+            backgroundColor="#1f2937"
+          />
+          <p 
+            style={{ fontSize: '0.8rem', color: '#666', cursor: 'pointer', textDecoration: 'underline' }}
+            onClick={() => captchaRef.current?.refresh()}
+          >
+            Click to refresh
+          </p>
+        </div>
 
       <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem', maxWidth: '300px' }}>
         <input
