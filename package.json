@@ -1,5 +1,5 @@
 {
-  "name": "react-simple-captcha",
+  "name": "easy-captcha",
   "version": "1.0.0",
   "description": "A lightweight, backend-free React captcha component.",
   "type": "module",

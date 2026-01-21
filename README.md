@@ -1,4 +1,4 @@
-# React Simple Captcha
+# Easy Captcha
 
 A lightweight, backend-free, secure-enough React captcha component that renders on a canvas and provides validation utilities.
 
@@ -14,14 +14,14 @@ A lightweight, backend-free, secure-enough React captcha component that renders 
 ## Installation
 
 ```bash
-npm install react-simple-captcha
+npm install easy-captcha
 ```
 
 ## Usage
 
 ```jsx
 import React, { useState } from 'react';
-import { Captcha, validateCaptcha } from 'react-simple-captcha';
+import { Captcha, validateCaptcha } from 'easy-captcha';
 
 const App = () => {
   const [captchaValue, setCaptchaValue] = useState('');

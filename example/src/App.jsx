@@ -1,5 +1,5 @@
 import { useState, useRef } from 'react'
-import { Captcha, validateCaptcha } from 'react-simple-captcha'
+import { Captcha, validateCaptcha } from 'easy-captcha'
 import './App.css'
 
 function App() {
@@ -27,7 +27,7 @@ function App() {
 
   return (
     <div style={{ padding: '2rem', fontFamily: 'sans-serif' }}>
-      <h1>React Simple Captcha Test</h1>
+      <h1>Easy Captcha Test</h1>
       
         <div style={{ marginBottom: '1rem' }}>
           <Captcha 

@@ -81,6 +81,14 @@ export const Captcha = forwardRef(({
       x += ctx.measureText(char).width + totalSpacing;
     }
 
+    // Add crossing line
+    ctx.strokeStyle = `rgba(${Math.random() * 255},${Math.random() * 255},${Math.random() * 255},0.7)`;
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(10, Math.random() * height);
+    ctx.lineTo(width - 10, Math.random() * height);
+    ctx.stroke();
+
   }, [length, width, height, onChange, textColor, backgroundColor]);
 
   useImperativeHandle(ref, () => ({
